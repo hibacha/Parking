@@ -1,0 +1,8 @@
+TroubleShooting
+1:in spring-context.xml, it needs to include spring mvc jar
+2:hibernate mapping file needs classpath as prefix.However, in non-web application is not required.
+3:in spring-context.xml, it needs to inject bean to set allwaysusefullpath to true(important)   
+4:solved the postgre deny issue for spring 
+  http://blog.csdn.net/dracotianlong/article/details/7907633 change the permission for postgre
+  (for mac user only) http://stackoverflow.com/questions/14025972/postgresql-how-to-find-pg-hba-conf-file-using-mac-os-x
+  
