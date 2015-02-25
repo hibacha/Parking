@@ -5,4 +5,6 @@ TroubleShooting
 4:solved the postgre deny issue for spring 
   http://blog.csdn.net/dracotianlong/article/details/7907633 change the permission for postgre
   (for mac user only) http://stackoverflow.com/questions/14025972/postgresql-how-to-find-pg-hba-conf-file-using-mac-os-x
-  
+5: set apache + tomcat cluster  
+6: set alwaysUseFullPath to true In this case: in web.xml /document/*, if you request host/context/document/company/upload the entire full /document/company/upload will send to annotated controller.Otherwise,
+only the match by wild-card part will send to controller.
