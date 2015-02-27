@@ -27,9 +27,9 @@
 		<property name="alwaysUseFullPath" value="true">
 		</property>
 	</bean>
-	<mvc:resources location="/deftApp/" mapping="/deftApp/**"/>
-	<mvc:resources location="/js/" mapping="/js/**"/>
-	
+	<mvc:resources location="/deftApp/" mapping="/deftApp/**" />
+	<mvc:resources location="/js/" mapping="/js/**" />
+
 	<mvc:annotation-driven />
 
 	<!-- declare using spring transaction annotation -->
@@ -82,6 +82,7 @@
 			<list>
 				<value> classpath:mappingDefinition/Location.hbm.xml</value>
 				<value> classpath:mappingDefinition/Route.hbm.xml</value>
+				<value> classpath:mappingDefinition/Person.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -146,6 +147,18 @@
 			</bean>
 		</property>
 	</bean>
+	<bean id="personDao" parent="abstractDao">
+		<property name="proxyInterfaces">
+			<value>com.nash.dao.PersonDao</value>
+		</property>
+		<property name="target">
+			<bean parent="abstractDaoTarget">
+				<constructor-arg>
+					<value>com.nash.model.Person</value>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>
 	<!-- end POJO definition -->
 
 	<bean id="transactionManager"
@@ -156,6 +169,11 @@
 	<bean id="foo" class="com.nash.Foo">
 		<property name="test" value="haha"></property>
 	</bean>
-
+	<bean id="taskExecutor"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="corePoolSize" value="5" />
+		<property name="maxPoolSize" value="10" />
+		<property name="WaitForTasksToCompleteOnShutdown" value="true" />
+	</bean>
 	<!-- end test bean definition -->
 </beans>
