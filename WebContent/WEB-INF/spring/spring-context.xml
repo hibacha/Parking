@@ -71,18 +71,22 @@
 		</property>
 		<property name="annotatedClasses">
 			<list>
-				<value>com.nash.model.Person</value>
-				<value>com.nash.model.Ticket</value>
+				<value>com.nash.model.Address</value>
+				<value>com.nash.model.Meter</value>
+			    <value>com.nash.model.MeterAddress</value>
+				<value>com.nash.model.MeterAddressId</value>
+				
+				<!-- <value>com.nash.model.Ticket</value>
 				<value>com.nash.model.Location</value>
 				<value>com.nash.model.Route</value>
-				<value>com.nash.model.Schedule</value>
+				<value>com.nash.model.Schedule</value> -->
 			</list>
 		</property>
 		<property name="mappingLocations">
 			<list>
-				<value> classpath:mappingDefinition/Location.hbm.xml</value>
+			<!-- 	<value> classpath:mappingDefinition/Location.hbm.xml</value>
 				<value> classpath:mappingDefinition/Route.hbm.xml</value>
-				<value> classpath:mappingDefinition/Person.hbm.xml</value>
+				<value> classpath:mappingDefinition/Person.hbm.xml</value> -->
 			</list>
 		</property>
 	</bean>
@@ -111,54 +115,34 @@
 	<!-- end of advisor -->
 
 	<!-- POJO definition -->
-	<bean id="locationDao" parent="abstractDao">
+	<bean id="addressDao" parent="abstractDao">
 		<property name="proxyInterfaces">
-			<value>com.nash.dao.LocationDao</value>
+			<value>com.nash.dao.AddressDao</value>
 		</property>
 		<property name="target">
 			<bean parent="abstractDaoTarget">
 				<constructor-arg>
-					<value>com.nash.model.Location</value>
+					<value>com.nash.model.Address</value>
 				</constructor-arg>
 			</bean>
 		</property>
 	</bean>
-	<bean id="routeDao" parent="abstractDao">
+	
+	
+	<bean id="meterDao" parent="abstractDao">
 		<property name="proxyInterfaces">
-			<value>com.nash.dao.RouteDao</value>
+			<value>com.nash.dao.MeterDao</value>
 		</property>
 		<property name="target">
 			<bean parent="abstractDaoTarget">
 				<constructor-arg>
-					<value>com.nash.model.Route</value>
+					<value>com.nash.model.Meter</value>
 				</constructor-arg>
 			</bean>
 		</property>
 	</bean>
-	<bean id="scheduleDao" parent="abstractDao">
-		<property name="proxyInterfaces">
-			<value>com.nash.dao.ScheduleDao</value>
-		</property>
-		<property name="target">
-			<bean parent="abstractDaoTarget">
-				<constructor-arg>
-					<value>com.nash.model.Schedule</value>
-				</constructor-arg>
-			</bean>
-		</property>
-	</bean>
-	<bean id="personDao" parent="abstractDao">
-		<property name="proxyInterfaces">
-			<value>com.nash.dao.PersonDao</value>
-		</property>
-		<property name="target">
-			<bean parent="abstractDaoTarget">
-				<constructor-arg>
-					<value>com.nash.model.Person</value>
-				</constructor-arg>
-			</bean>
-		</property>
-	</bean>
+
+	
 	<!-- end POJO definition -->
 
 	<bean id="transactionManager"
