@@ -5,11 +5,34 @@ import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
 
 @Embeddable
-public class MeterAddressId  implements java.io.Serializable{
+public class MeterAddressId implements java.io.Serializable {
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Meter meter;
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Address address;
+
+	public Meter getMeter() {
+		return meter;
+	}
+
+	public void setMeter(Meter meter) {
+		this.meter = meter;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5984956938673258458L;
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -39,29 +62,5 @@ public class MeterAddressId  implements java.io.Serializable{
 		} else if (!meter.equals(other.meter))
 			return false;
 		return true;
-	}
-
-
-	@ManyToOne(cascade=CascadeType.ALL)
-	private Meter meter;
-	@ManyToOne(cascade=CascadeType.ALL)
-	private Address address;
-	
-	
-	public Meter getMeter(){
-		return meter;
-	}
-	
-	public void setMeter(Meter meter) {
-		this.meter = meter;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
-	
-	public Address getAddress(){
-		return address;
 	}
 }

@@ -9,11 +9,45 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name ="METER_ADDRESS")
+@Table(name = "METER_ADDRESS")
 @AssociationOverrides({
-		@AssociationOverride(name="pk.meter", joinColumns = @JoinColumn(name = "METER_ID")),
-		@AssociationOverride(name="pk.address",joinColumns=@JoinColumn(name="ADDRESS_ID"))})
-public class MeterAddress implements java.io.Serializable{
+		@AssociationOverride(name = "pk.meter", joinColumns = @JoinColumn(name = "METER_ID")),
+		@AssociationOverride(name = "pk.address", joinColumns = @JoinColumn(name = "ADDRESS_ID")) })
+public class MeterAddress implements java.io.Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8962983726678650134L;
+	@EmbeddedId
+	private MeterAddressId pk = new MeterAddressId();
+
+	public MeterAddressId getPk() {
+		return pk;
+	}
+
+	public void setPk(MeterAddressId pk) {
+		this.pk = pk;
+	}
+
+	@Transient
+	public Address getAddress() {
+		return pk.getAddress();
+	}
+
+	public void setAddress(Address address) {
+		pk.setAddress(address);
+	}
+
+	@Transient
+	public Meter getMeter() {
+		return pk.getMeter();
+	}
+
+	public void setMeter(Meter meter) {
+		pk.setMeter(meter);
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -38,38 +72,4 @@ public class MeterAddress implements java.io.Serializable{
 			return false;
 		return true;
 	}
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 8962983726678650134L;
-	@EmbeddedId
-	private MeterAddressId pk = new MeterAddressId();
-
-	public MeterAddressId getPk() {
-		return pk;
-	}
-
-	public void setPk(MeterAddressId pk) {
-		this.pk = pk;
-	}
-	
-	@Transient
-	public Address getAddress(){
-		return pk.getAddress();
-	}
-	
-	public void setAddress(Address address){
-		pk.setAddress(address);
-	}
-	
-	@Transient
-	public Meter getMeter(){
-		return pk.getMeter();
-	}
-	
-	public void setMeter(Meter meter){
-		 pk.setMeter(meter);
-	}
-	
 }

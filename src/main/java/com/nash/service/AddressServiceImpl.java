@@ -17,18 +17,18 @@ public class AddressServiceImpl implements AddressService{
 	private AddressDao addressDao;
 
 	@Override
-	public Integer createLocation(Address location) {
-		return addressDao.create(location);
+	public Integer createAddress(Address address) {
+		return addressDao.create(address);
 	}
 	
 	@Override
-	public void deleteLocationById(Integer id){
+	public void deleteAddressById(Integer id){
 		Address location = addressDao.read(id);
 		addressDao.delete(location);
 	}
 
 	@Override
-	public Address getLocation(Integer id) {
+	public Address getAddress(Integer id) {
 		try {
 			TimeUnit.SECONDS.sleep(5);
 		} catch (InterruptedException e) {
@@ -39,7 +39,7 @@ public class AddressServiceImpl implements AddressService{
 	}
 
 	@Override
-	public void updateLocation(Address location) {
+	public void updateAddress(Address location) {
 		addressDao.update(location);
 	}
 
