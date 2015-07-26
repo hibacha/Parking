@@ -9,11 +9,6 @@ import java.util.TimeZone;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.nash.model.Location;
-import com.nash.model.Route;
-import com.nash.service.LocationService;
-import com.nash.service.RouteService;
-
 public class SpringTest {
 
 	/**
@@ -29,31 +24,31 @@ public class SpringTest {
 		/*
 		 
 		 * */
-		
-		Location nyc = new Location();
-		nyc.setAbbreviation("NYC");
-		nyc.setAddress("baba,Manhanttan");
-		
-		Location bos = new Location();
-		bos.setAbbreviation("BOS");
-		bos.setAddress("SOUTH STATION");
+//		
+//		Location nyc = new Location();
+//		nyc.setAbbreviation("NYC");
+//		nyc.setAddress("baba,Manhanttan");
+//		
+//		Location bos = new Location();
+//		bos.setAbbreviation("BOS");
+//		bos.setAddress("SOUTH STATION");
 	
 		
 //
 //		service.save(nyc);
 //		service.save(bos);
 		
-		Route bos2nyc= new Route();
-		bos2nyc.setPickUp(bos);
-		bos2nyc.setDropOff(nyc);
+//		Route bos2nyc= new Route();
+//		bos2nyc.setPickUp(bos);
+//		bos2nyc.setDropOff(nyc);
 	
 //		service.save(bos);
 		
 		
-		LocationService locationService = (LocationService)ctx.getBean("locationService");
-		//locationService.createLocation(bos);
-		RouteService routeService = (RouteService)ctx.getBean("routeService");
-		routeService.save(bos2nyc);
+//		LocationService locationService = (LocationService)ctx.getBean("locationService");
+//		//locationService.createLocation(bos);
+//		RouteService routeService = (RouteService)ctx.getBean("routeService");
+//		routeService.save(bos2nyc);
 		//routeService.removeById(20);
 //		locationService.createLocation(nyc);
 //		System.out.println(nyc.getId());

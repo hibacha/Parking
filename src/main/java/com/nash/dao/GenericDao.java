@@ -1,6 +1,7 @@
 package com.nash.dao;
 
 import java.io.Serializable;
+import java.util.List;
 
 public interface GenericDao<T, PK extends Serializable> {
 	 /** Persist the newInstance object into database */
@@ -16,4 +17,6 @@ public interface GenericDao<T, PK extends Serializable> {
 
     /** Remove an object from persistent storage in the database */
     void delete(T persistentObject);
+    
+    List<T> retriveAll(Class<T> clazz); 
 }

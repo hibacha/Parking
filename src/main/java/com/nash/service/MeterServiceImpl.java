@@ -1,40 +1,44 @@
 package com.nash.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.nash.dao.MeterDao;
 import com.nash.model.Meter;
+
 @Service("meterService")
 @Transactional
 public class MeterServiceImpl implements MeterService {
 
 	@Autowired
 	MeterDao meterDao;
-	
+
 	@Override
-	public Integer createMeter(Meter location) {
-		// TODO Auto-generated method stub
-		return meterDao.create(location);
+	public Integer createMeter(Meter meter) {
+		return meterDao.create(meter);
 	}
 
 	@Override
 	public void deleteMeterById(Integer id) {
-		// TODO Auto-generated method stub
-
+		meterDao.delete(meterDao.read(id));
 	}
 
 	@Override
 	public Meter getMeter(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		return meterDao.read(id);
 	}
 
 	@Override
-	public void updateMeter(Meter location) {
-		// TODO Auto-generated method stub
+	public void updateMeter(Meter meter) {
+		meterDao.update(meter);
+	}
 
+	@Override
+	public List<Meter> retriveAllMeter() {
+		return meterDao.retriveAll(Meter.class);
 	}
 
 }

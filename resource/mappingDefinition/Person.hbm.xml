@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
  
 <hibernate-mapping>
-    <class name="com.nash.model.Person" table="PERSONS"  schema="public">
+    <!-- <class name="com.nash.model.Person" table="PERSONS"  schema="public">
         <id name="personid" type="java.lang.Integer">
             <column name="personid" />
             <generator class="assigned"/>
@@ -20,5 +20,9 @@
         <property name="address" type="string">
             <column name="address" length="255"   />
         </property>
-    </class>
+        <property name="manager" type=""></property>
+    </class> -->
+    <sql-query name="com.nash.model.Person.sqlFindByAbbreviation" >
+			SELECT pp.* FROM PERSONS pp, PERSONS mm where pp.manager_id = mm.person_id
+    </sql-query>
 </hibernate-mapping>

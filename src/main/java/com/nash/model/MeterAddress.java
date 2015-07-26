@@ -21,7 +21,7 @@ public class MeterAddress implements java.io.Serializable {
 	private static final long serialVersionUID = 8962983726678650134L;
 	@EmbeddedId
 	private MeterAddressId pk = new MeterAddressId();
-
+	
 	public MeterAddressId getPk() {
 		return pk;
 	}

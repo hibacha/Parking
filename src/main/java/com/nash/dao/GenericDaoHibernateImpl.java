@@ -6,17 +6,18 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.nash.finder.FinderExecutor;
+import com.nash.finder.JoinExecutor;
 @Repository
 public class GenericDaoHibernateImpl<T, PK extends Serializable> implements
-		GenericDao<T, PK>, FinderExecutor<T> {
+		GenericDao<T, PK>, FinderExecutor<T>, JoinExecutor {
 	
 	public GenericDaoHibernateImpl(SessionFactory sessionFactory) {
 		super();
@@ -75,6 +76,9 @@ public class GenericDaoHibernateImpl<T, PK extends Serializable> implements
 	public List<T> executeFinder(Method method, Object[] queryArgs) {
 		final String queryName = queryNameFromMethod(method);
 		final Query namedQuery = getSession().getNamedQuery(queryName);
+		SQLQuery query = getSession().createSQLQuery("select now()");
+		List rst = query.list();
+		System.out.print(rst.get(0));
 		for (int i = 0; i < queryArgs.length; i++) {
 			Object arg = queryArgs[i];
 			namedQuery.setParameter(i, arg);
@@ -101,6 +105,27 @@ public class GenericDaoHibernateImpl<T, PK extends Serializable> implements
 			namedQuery.setParameter(i, arg);
 		}
 		return (Iterator<T>)namedQuery.iterate();
+	}
+
+	@Override
+	public List joinObject(Method method, Object[] queryArgs) {
+		final String queryName = queryNameFromMethod(method);
+		final Query namedQuery = getSession().getNamedQuery(queryName);
+		SQLQuery sqlQuery = getSession().createSQLQuery(namedQuery.getQueryString());
+		List<Object[]> result = sqlQuery.list();
+		
+		System.out.println(result.size());
+		Object[] colums= (Object[])result.get(0);
+		System.out.println(colums.length);
+		return sqlQuery.list();
+	}
+
+	@Override
+	public List<T> retriveAll(Class<T> clazz) {
+		String[]   qualifiers = clazz.toString().split("\\.");
+		String pojoName = qualifiers[qualifiers.length-1];
+		List<T> result = getSession().createQuery("from " + pojoName).list();
+		return result;
 	}
 
 	// Not showing implementations of getSession() and setSessionFactory()

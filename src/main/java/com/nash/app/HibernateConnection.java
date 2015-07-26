@@ -1,15 +1,10 @@
 package com.nash.app;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.nash.model.Person;
 
 public class HibernateConnection {
 	static final Logger logger = LoggerFactory
@@ -47,24 +42,24 @@ public class HibernateConnection {
 		}
 	}
 	public  void addPerson(){
-//		Transaction tx = null;
-	      Session session = sessionFactory.openSession();
-	      try{
-	    	  logger.info("transaction");
-//	         tx = session.beginTransaction();
-	         Person p = new Person();
-	         p.setPersonid(113);
-	         p.setFirstname("momm");
-	         p.setLastname("baba");
-	         session.save(p);
-	         session.flush();
-//	        tx.commit();
-	      }catch (HibernateException e) {
-//	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      }finally {
-	         session.close(); 
-	      }
+////		Transaction tx = null;
+//	      Session session = sessionFactory.openSession();
+//	      try{
+//	    	  logger.info("transaction");
+////	         tx = session.beginTransaction();
+//	         Person p = new Person();
+//	         p.setPersonid(113);
+//	         p.setFirstname("momm");
+//	         p.setLastname("baba");
+//	         session.save(p);
+//	         session.flush();
+////	        tx.commit();
+//	      }catch (HibernateException e) {
+////	         if (tx!=null) tx.rollback();
+//	         e.printStackTrace(); 
+//	      }finally {
+//	         session.close(); 
+//	      }
 		
 	}
 	public static void shutdown() {

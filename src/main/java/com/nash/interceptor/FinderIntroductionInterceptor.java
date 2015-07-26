@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.aop.IntroductionInterceptor;
 
 import com.nash.finder.FinderExecutor;
+import com.nash.finder.JoinExecutor;
 
 
 
@@ -28,6 +29,9 @@ public class FinderIntroductionInterceptor implements IntroductionInterceptor, I
 		if(methodName.startsWith("find")){
 			FinderExecutor genericDaoImpl = (FinderExecutor)methodInvocation.getThis();
 			return genericDaoImpl.executeFinder(method,args );
+		}else if(methodName.startsWith("sql")){
+			JoinExecutor immpl = (JoinExecutor)methodInvocation.getThis();
+			return immpl.joinObject(method, args);
 		}
 		return methodInvocation.proceed();
 	}

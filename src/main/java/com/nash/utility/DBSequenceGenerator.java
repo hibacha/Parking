@@ -9,7 +9,7 @@ import java.lang.reflect.Field;
 
 import javax.persistence.SequenceGenerator;
 
-import com.nash.model.Meter;
+import com.nash.model.Address;
 
 public class DBSequenceGenerator<T> {
 	private String seqName;
@@ -49,8 +49,8 @@ public class DBSequenceGenerator<T> {
 	}
 
 	public static void main(String[] args) throws Exception {
-		DBSequenceGenerator<Meter> seq = new DBSequenceGenerator<Meter>();
-		seq.createSql(Meter.class);
+		DBSequenceGenerator<Address> seq = new DBSequenceGenerator<Address>();
+		seq.createSql(Address.class);
 
 	}
 

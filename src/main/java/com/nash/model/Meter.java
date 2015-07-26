@@ -3,6 +3,7 @@ package com.nash.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,7 +13,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Meter implements java.io.Serializable {
@@ -67,9 +70,11 @@ public class Meter implements java.io.Serializable {
 	public void setMeterAddress(Set<MeterAddress> meterAddress) {
 		this.meterAddress = meterAddress;
 	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.meter")
-	@Cascade({ CascadeType.SAVE_UPDATE })
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.meter", cascade = {
+			CascadeType.PERSIST, CascadeType.MERGE })
+	@Cascade({ org.hibernate.annotations.CascadeType.SAVE_UPDATE,
+			org.hibernate.annotations.CascadeType.DELETE })
 	private Set<MeterAddress> meterAddress = new HashSet<MeterAddress>();
 
 	@Override
