@@ -3,7 +3,7 @@ Ext.define("ext4deft.view.MapContainer", {
     extend: "Ext.container.Container",
     alias: 'widget.mapContainer',
     inject: ["locationStore"],
-    requires: ["Ext.form.field.Date", "ext4deft.controller.MapContainerController"],
+    requires: ["Ext.form.field.Date", "ext4deft.controller.MapContainerController","ext4deft.view.SearchCombo"],
     layout:"vbox",
     title: "Map",
     config: {
@@ -11,7 +11,8 @@ Ext.define("ext4deft.view.MapContainer", {
     },
     items: [{
         xtype: 'container',
-        height:50
+        height:50,
+        items:[{xtype:'searchCombo'}]
 
         
     }, {
