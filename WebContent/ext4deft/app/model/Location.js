@@ -15,5 +15,11 @@ Ext.define("ext4deft.model.Location", {
 		name : 'lng',
 		type : 'float',
 		mapping : 'longitude'
+	},{
+		name: 'address',
+		type: 'string'
+	},{
+		name: 'placeId',
+		type: 'string'
 	} ]
 })

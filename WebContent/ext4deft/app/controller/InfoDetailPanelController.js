@@ -9,11 +9,11 @@ Ext.define('ext4deft.controller.InfoDetailPanelController',{
 			
 		},
 		searchText:{
-			keypress:{fn:'onKeypress',buffer:1500},
+			keypress:{fn:'onKeyPress',buffer:1500},
 			boxready:'onBoxready'
 		}
 	},
-	onKeypress:function(){
+	onKeyPress:function(){
 		var me = this;
 		var address = me.getSearchText().getValue();
 		var geocoder = new google.maps.Geocoder();

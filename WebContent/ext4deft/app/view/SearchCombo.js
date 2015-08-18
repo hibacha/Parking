@@ -11,19 +11,26 @@ Ext.define('ext4deft.view.SearchCombo', {
 	margin:'10 0 0 10',
 	width:350,
 	alias:'widget.searchCombo',
+	itemId:'searchCombo',
+	id:'searchCombo',
+	enableKeyEvents:true,
 	queryMode:'local',
-	typeAhead:true,
-	typeAheadDelay:500,
 	hideTrigger:true,
 	initComponent : function() {
 		Ext.apply(this,{
 			store:this.getGeoLocationStore()
 		});
+		this.store.load({
+		    scope: this,
+		    callback: function(records, operation, success) {
+		       this.expand();
+		    }
+		});
 		return this.callParent(arguments);
 	},
 	listConfig:{
 		getInnerTpl: function(){
-			return '<h3>{city}</h3>'+'<div>latitude:{lat}--longitude:{lng}</div>'
+			return '{city}'+'<div style="color:grey">{address}</div>'
 		}
 	}
 });
