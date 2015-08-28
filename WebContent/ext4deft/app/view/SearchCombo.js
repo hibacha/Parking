@@ -12,7 +12,6 @@ Ext.define('ext4deft.view.SearchCombo', {
 	width:350,
 	alias:'widget.searchCombo',
 	itemId:'searchCombo',
-	id:'searchCombo',
 	enableKeyEvents:true,
 	queryMode:'local',
 	hideTrigger:true,

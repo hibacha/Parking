@@ -1,31 +1,33 @@
 Ext.define("ext4deft.controller.MapContainerController", {
 	extend : "Deft.mvc.ViewController",
 	inject : [ "locationStore", "googleMapContext" ],
+	requires:['Ext.form.Label'],
 	config : {
 		locationStore : null,
 		googleMapContext : null
 	},
 	observe : {
 		googleMapContext : {
-			sycMap : "onSycMap"
 		}
 	},
 	control : {
 		view : {
-			boxready : "loadInitialData"
 		},
 		mycanvas : {
 			boxready : "afterCreate"
+		},
+		addWayPointButton: {
+			click:'onAddWayPoint'
 		}
 	},
 	init : function() {
 		return this.callParent(arguments);
 	},
-	loadInitialData : function() {
-
-	},
-	onSelect : function() {
-		alert('select');
+	onAddWayPoint: function(){
+		var container = this.getView().query('#wayPointContainer')[0];
+		var currentSize = container.items.length;
+		container.items.insert(currentSize,Ext.create('ext4deft.view.SearchCombo',{itemId:'searchCombo'+currentSize}));
+		container.doLayout();
 	},
 	afterCreate : function() {
 		var me = this;
@@ -36,7 +38,6 @@ Ext.define("ext4deft.controller.MapContainerController", {
 			},
 			zoom : 10
 		};
-
 		var map = new google.maps.Map(document.getElementById('map-canvas'),
 				mapOptions);
 		google.maps.event.addListener(map,'click',function(mouseEvent){
@@ -44,8 +45,5 @@ Ext.define("ext4deft.controller.MapContainerController", {
 				me.getGoogleMapContext().changePin(latLng);
 		});
 		me.getGoogleMapContext().sycMap(map);
-	},
-	onSycMap : function(map) {
-
 	}
 });
