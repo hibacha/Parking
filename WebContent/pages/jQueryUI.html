@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>jQuery UI Resizable - Default functionality</title>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
+<style>
+#resizable {
+	width: 150px;
+	height: 150px;
+	padding: 0.5em;
+}
+
+#resizable h3 {
+	text-align: center;
+	margin: 0;
+}
+
+#container {
+	border-radius: 25px;
+	border: 2px solid #8AC007;
+	padding: 20px;
+	width: 200px;
+	height: 150px;
+	overflow: auto;
+}
+</style>
+<script>
+	$(function() {
+		var oldWidth, oldHeight;
+		$("#resizable").resizable({
+			resize : function(event, ui) {
+				if(ui.size.width-oldWidth>0){
+					console.log("wider");
+				}else if(ui.size.width-oldWidth<0){
+					console.log("narrower");
+				}
+				if(ui.size.height-oldHeight>0){
+					console.log("taller");
+				}else if(ui.size.height-oldHeight<0){
+					console.log("shorter");
+				}
+				oldWidth = ui.size.width;
+				oldHeight = ui.size.height;
+			},
+			start: function(event,ui){
+				oldWidth = ui.size.width;
+				oldHeight = ui.size.height;
+			}
+		});
+	});
+</script>
+</head>
+<body>
+	<div id="container">
+		<div id="resizable" class="ui-widget-content">
+			<h3 class="ui-widget-header">Resizable</h3>
+		</div>
+
+	</div>
+</body>
+</html>
