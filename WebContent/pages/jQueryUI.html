@@ -46,6 +46,8 @@
 				}
 				oldWidth = ui.size.width;
 				oldHeight = ui.size.height;
+				
+				$("#container").scrollTop($("#container").prop("scrollHeight"));
 			},
 			start: function(event,ui){
 				oldWidth = ui.size.width;
