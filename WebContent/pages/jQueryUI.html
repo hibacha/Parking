@@ -35,24 +35,41 @@
 		$("#resizable").resizable({
 			resize : function(event, ui) {
 				if(ui.size.width-oldWidth>0){
-					console.log("wider");
+					//console.log("wider");
 				}else if(ui.size.width-oldWidth<0){
-					console.log("narrower");
+					//console.log("narrower");
 				}
 				if(ui.size.height-oldHeight>0){
-					console.log("taller");
+					//console.log("taller");
 				}else if(ui.size.height-oldHeight<0){
-					console.log("shorter");
+				//	console.log("shorter");
 				}
 				oldWidth = ui.size.width;
 				oldHeight = ui.size.height;
 				
+				var containerWidth = $("#container").width();
+				var containerHeight = $("#container").height();
+				
+				
+				var containerWidth = $("#container").width();
+				var containerHeight = $("#container").height();
+		/* 		console.log("containerWidth:"+containerWidth);
+				console.log("containerHeight"+containerHeight);
+ */				
+				if(ui.originalPosition.left+ui.size.width>containerWidth){
+					console.log("bang");
+				}
+				
+				if(ui.originalPosition.top+ui.size.height>containerHeight){
+					console.log("cao");
+				}
 				// $("#container").scrollTop($("#container").prop("scrollHeight"));
 				//$("#container").scrollLeft($("#container").prop("scrollWidth"));
 			},
 			start: function(event,ui){
 				oldWidth = ui.size.width;
 				oldHeight = ui.size.height;
+				
 			}
 		});
 	});
