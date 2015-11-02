@@ -30,7 +30,11 @@
 	<mvc:resources location="/deftApp/" mapping="/deftApp/**" />
 	<mvc:resources location="/js/" mapping="/js/**" />
 
-	<mvc:annotation-driven />
+	<mvc:annotation-driven>
+			<mvc:argument-resolvers>
+				<bean class="com.nash.resolver.LongToDateResolver"></bean>
+			</mvc:argument-resolvers>
+	</mvc:annotation-driven>
 
 	<!-- declare using spring transaction annotation -->
 	<tx:annotation-driven />
@@ -39,8 +43,8 @@
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.postgresql.Driver" />
-		<property name="url" value="jdbc:postgresql://localhost:5432/datamining" />
-		<property name="username" value="zhouyf" />
+		<property name="url" value="jdbc:postgresql://localhost:5432/parking" />
+		<property name="username" value="steve" />
 		<property name="password" value="test123" />
 	</bean>
 
@@ -73,20 +77,17 @@
 			<list>
 				<value>com.nash.model.Address</value>
 				<value>com.nash.model.Meter</value>
-			    <value>com.nash.model.MeterAddress</value>
+				<value>com.nash.model.MeterAddress</value>
 				<value>com.nash.model.MeterAddressId</value>
-				
-				<!-- <value>com.nash.model.Ticket</value>
-				<value>com.nash.model.Location</value>
-				<value>com.nash.model.Route</value>
-				<value>com.nash.model.Schedule</value> -->
+
+				<!-- <value>com.nash.model.Ticket</value> <value>com.nash.model.Location</value> 
+					<value>com.nash.model.Route</value> <value>com.nash.model.Schedule</value> -->
 			</list>
 		</property>
 		<property name="mappingLocations">
 			<list>
-			<!-- 	<value> classpath:mappingDefinition/Location.hbm.xml</value>
-				<value> classpath:mappingDefinition/Route.hbm.xml</value>
-				<value> classpath:mappingDefinition/Person.hbm.xml</value> -->
+				<!-- <value> classpath:mappingDefinition/Location.hbm.xml</value> <value> 
+					classpath:mappingDefinition/Route.hbm.xml</value> <value> classpath:mappingDefinition/Person.hbm.xml</value> -->
 			</list>
 		</property>
 	</bean>
@@ -127,8 +128,8 @@
 			</bean>
 		</property>
 	</bean>
-	
-	
+
+
 	<bean id="meterDao" parent="abstractDao">
 		<property name="proxyInterfaces">
 			<value>com.nash.dao.MeterDao</value>
@@ -142,7 +143,7 @@
 		</property>
 	</bean>
 
-	
+
 	<!-- end POJO definition -->
 
 	<bean id="transactionManager"
@@ -159,19 +160,25 @@
 		<property name="maxPoolSize" value="10" />
 		<property name="WaitForTasksToCompleteOnShutdown" value="true" />
 	</bean>
-	
-	
+
+	<bean id="executorService" class="java.util.concurrent.Executors"
+		factory-method="newFixedThreadPool">
+		<constructor-arg value="10"></constructor-arg>
+	</bean>
+
 	<!-- Configure to plugin JSON as request and response in method handler -->
-    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
-        <property name="messageConverters">
-            <list>
-                <ref bean="jsonMessageConverter"/>
-            </list>
-        </property>
-    </bean>
-     
-    <!-- Configure bean to convert JSON to POJO and vice versa -->
-    <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-    </bean> 
+	<bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="jsonMessageConverter" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- Configure bean to convert JSON to POJO and vice versa -->
+	<bean id="jsonMessageConverter"
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+	</bean>
 	<!-- end test bean definition -->
 </beans>
